@@ -14,6 +14,7 @@ const ID = Object.freeze({
   sectionAddButton: 'section-add-button',
   app: 'app',
   stationTable: 'station-table',
+  lineTable: 'line-table',
 });
 
 const CLASS = Object.freeze({

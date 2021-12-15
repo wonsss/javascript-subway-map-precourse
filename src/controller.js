@@ -1,5 +1,5 @@
 import { elements as $ } from './util/elements.js';
-import { KEY } from './util/constants.js';
+import { ID, KEY } from './util/constants.js';
 
 export default class SubwayController {
   constructor(model, view) {
@@ -32,7 +32,10 @@ export default class SubwayController {
       this.loadMapPrintManagerTab()
     );
     $.stationAddButton().addEventListener('click', e =>
-      this.addStationHandler.call(this, e)
+      this.addStationBtnHandler.call(this, e)
+    );
+    $.lineAddButton().addEventListener('click', e =>
+      this.addLineBtnHandler.call(this, e)
     );
   }
 
@@ -43,9 +46,7 @@ export default class SubwayController {
       this.view.renderTable($.stationTable(), $.stationTbody(stationName));
     });
     $.stationDeleteButtons().forEach(button =>
-      button.addEventListener('click', event =>
-        this.stationDeleteButtonHandler(event)
-      )
+      button.addEventListener('click', this.stationDeleteBtnHandler)
     );
     this.view.showStationManagerTab();
   }
@@ -67,24 +68,55 @@ export default class SubwayController {
     this.view.showMapPrintManagerTab();
   }
 
-  addStationHandler(e) {
+  addStationBtnHandler(e) {
     e.preventDefault();
     const stationName = $.stationNameInput().value;
     this.view.renderTable($.stationTable(), $.stationTbody(stationName));
     $.stationDeleteButtons().forEach(button =>
-      button.addEventListener('click', event =>
-        this.stationDeleteButtonHandler(event)
-      )
+      button.addEventListener('click', this.stationDeleteBtnHandler)
     );
     this.model.setStationObj(stationName);
   }
 
-  stationDeleteButtonHandler(event) {
+  addLineBtnHandler(e) {
+    e.preventDefault();
+    const lineName =
+      document.forms[ID.lineAddButton].elements[ID.lineNameInput].value;
+    const startStation =
+      document.forms[ID.lineAddButton].elements[ID.lineStartStationSelector]
+        .value;
+    const endStation =
+      document.forms[ID.lineAddButton].elements[ID.lineEndStationSelector]
+        .value;
+    this.view.renderTable(
+      $.lineTable(),
+      $.lineTbody(lineName, startStation, endStation)
+    );
+    $.lineDeleteButtons().forEach(button =>
+      button.addEventListener('click', this.lineDeleteBtnHandler)
+    );
+  }
+
+  test(e) {
+    console.log(e.target);
+  }
+
+  stationDeleteBtnHandler = event => {
+    console.log(event);
     if (window.confirm('정말로 삭제하시겠습니까?')) {
       this.view.removeRowOfTable(event);
       const stationName =
         event.target.parentElement.parentElement.childNodes[1].innerText;
       this.model.deleteStationInObj(stationName);
     }
-  }
+  };
+
+  lineDeleteBtnHandler = event => {
+    if (window.confirm('정말로 삭제하시겠습니까?')) {
+      this.view.removeRowOfTable(event);
+      //   const stationName =
+      //     event.target.parentElement.parentElement.childNodes[1].innerText;
+      //   this.model.deleteStationInObj(stationName);
+    }
+  };
 }

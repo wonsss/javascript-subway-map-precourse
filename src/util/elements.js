@@ -12,41 +12,61 @@ const elements = Object.freeze({
 
   stationManagerTabHTML: `
 <div class="${CLASS.stationManagerTab}">
-  <h3>역 이름</h3>
-  <form>
-    <input type="text" id="${ID.stationNameInput}" placeholder="역 이름을 입력해주세요."/>
-    <input type="submit" id="${ID.stationAddButton}" value="역 추가"/>
-  </form>
-  <h2>지하철 역 목록</h2>
-  <table>
-    <thead>
-        <tr>
-          <th>역 이름</th>
-          <th>설정</th>
-        </tr>
-    </thead>
-    <tbody id="${ID.stationTable}"></tbody>
-  </table>
+  <div>
+    <h3>역 이름</h3>
+    <form>
+      <input type="text" id="${ID.stationNameInput}" placeholder="역 이름을 입력해주세요."/>
+      <input type="submit" id="${ID.stationAddButton}" value="역 추가"/>
+    </form>
+  </div>
+  <div>
+    <h2>지하철 역 목록</h2>
+    <table>
+      <thead>
+          <tr>
+            <th>역 이름</th>
+            <th>설정</th>
+          </tr>
+      </thead>
+      <tbody id="${ID.stationTable}"></tbody>
+    </table>
+  </div>
 </div>
 
 `,
 
   lineManagerTabHTML: `
 <div class="${CLASS.lineManagerTab}">
-  <h3>노선 이름</h3>
-  <form>
-    <input type="text" id="${ID.lineNameInput}" placeholder="노선 이름을 입력해주세요."/>
-    <br/>
-    <label for="${ID.lineStartStationSelector}">상행 종점</label>
-    <select id="${ID.lineStartStationSelector}" name="${ID.lineStartStationSelector}">
-    </select>
-    <br/>
-    <label for="${ID.lineEndStationSelector}">하행 종점</label>
-    <select id="${ID.lineEndStationSelector}" name="${ID.lineEndStationSelector}">
-    </select>
-    <br/>
-    <input type="submit" id="${ID.lineAddButton}" value="노선 추가"/>
-  </form>
+  <div>
+    <h3>노선 이름</h3>
+    <form name="${ID.lineAddButton}" >
+      <input type="text" id="${ID.lineNameInput}" name="${ID.lineNameInput}" placeholder="노선 이름을 입력해주세요."/>
+      <br/>
+      <label for="${ID.lineStartStationSelector}">상행 종점</label>
+      <select id="${ID.lineStartStationSelector}" name="${ID.lineStartStationSelector}">
+      </select>
+      <br/>
+      <label for="${ID.lineEndStationSelector}">하행 종점</label>
+      <select id="${ID.lineEndStationSelector}" name="${ID.lineEndStationSelector}">
+      </select>
+      <br/>
+      <input type="submit" id="${ID.lineAddButton}" value="노선 추가"/>
+    </form>
+  </div>
+  <div>
+    <h2>지하철 노선 목록</h2>
+    <table>
+      <thead>
+          <tr>
+            <th>노선 이름</th>
+            <th>상행 종점역</th>
+            <th>하행 종점역</th>
+            <th>설정</th>
+          </tr>
+      </thead>
+      <tbody id="${ID.lineTable}"></tbody>
+    </table>
+  </div>
 </div>
 `,
 
@@ -69,6 +89,15 @@ const elements = Object.freeze({
 </tr>
   `,
 
+  lineTbody: (lineName, startStation, endStation) => `
+<tr>
+  <td>${lineName}</td>
+  <td>${startStation}</td>
+  <td>${endStation}</td>
+  <td><button class="${CLASS.lineDeleteButton}">삭제</button></td>
+</tr>
+`,
+
   app: () => document.getElementById(ID.app),
   stationManagerButton: () => document.getElementById(ID.stationManagerButton),
   lineManagerButton: () => document.getElementById(ID.lineManagerButton),
@@ -88,6 +117,7 @@ const elements = Object.freeze({
   sectionOrderInput: () => document.getElementById(ID.sectionOrderInput),
   sectionAddButton: () => document.getElementById(ID.sectionAddButton),
   stationTable: () => document.getElementById(ID.stationTable),
+  lineTable: () => document.getElementById(ID.lineTable),
   stationManagerTab: () =>
     document.querySelector(`.${CLASS.stationManagerTab}`),
   lineManagerTab: () => document.querySelector(`.${CLASS.lineManagerTab}`),
@@ -97,11 +127,12 @@ const elements = Object.freeze({
     document.querySelector(`.${CLASS.mapPrintManagerTab}`),
   stationDeleteButtons: () =>
     document.querySelectorAll(`.${CLASS.stationDeleteButton}`),
-  lineDeleteButton: () => document.querySelector(`.${CLASS.lineDeleteButton}`),
-  sectionLineMenuButton: () =>
-    document.querySelector(`.${CLASS.sectionLineMenuButton}`),
-  sectionDeleteButton: () =>
-    document.querySelector(`.${CLASS.sectionDeleteButton}`),
+  lineDeleteButtons: () =>
+    document.querySelectorAll(`.${CLASS.lineDeleteButton}`),
+  sectionLineMenuButtons: () =>
+    document.querySelectorAll(`.${CLASS.sectionLineMenuButton}`),
+  sectionDeleteButtons: () =>
+    document.querySelectorAll(`.${CLASS.sectionDeleteButton}`),
 });
 
 export { elements };
