@@ -49,7 +49,7 @@ export default class SubwayController {
     });
     $.stationDeleteButtons().forEach(button =>
       button.addEventListener('click', event =>
-        this.view.removeRowOfTable(event)
+        this.stationDeleteButtonHandler(event)
       )
     );
   }
@@ -76,11 +76,12 @@ export default class SubwayController {
       )
     );
     this.model.setStationObj(stationName);
-    console.log(this.model._stationObj);
-    this.model.setLocalStorage(KEY.station, this.model._stationObj);
   }
 
   stationDeleteButtonHandler(event) {
     this.view.removeRowOfTable(event);
+    const stationName =
+      event.target.parentElement.parentElement.childNodes[1].innerText;
+    this.model.deleteStationInObj(stationName);
   }
 }

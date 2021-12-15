@@ -8,6 +8,12 @@ export default class SubwayModel {
 
   setStationObj(stationName) {
     this._stationObj[stationName] = { lineName: null };
+    this.setLocalStorage(KEY.station, this._stationObj);
+  }
+
+  deleteStationInObj(stationName) {
+    delete this._stationObj[stationName];
+    this.setLocalStorage(KEY.station, this._stationObj);
   }
 
   setLineObjInitially(lineName, firstStation, lastStation) {
