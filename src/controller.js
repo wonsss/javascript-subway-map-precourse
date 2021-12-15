@@ -39,11 +39,6 @@ export default class SubwayController {
   loadStationManagerTab() {
     this.view.clearTable($.stationTable());
     const stationObj = this.model.getLocalStorage(KEY.station);
-    this.makeStationManagerTable(stationObj);
-    this.view.showStationManagerTab();
-  }
-
-  makeStationManagerTable(stationObj) {
     Object.keys(stationObj).forEach(stationName => {
       this.view.renderTable($.stationTable(), $.stationTbody(stationName));
     });
@@ -52,6 +47,7 @@ export default class SubwayController {
         this.stationDeleteButtonHandler(event)
       )
     );
+    this.view.showStationManagerTab();
   }
 
   loadLineManagerTab() {
@@ -79,9 +75,11 @@ export default class SubwayController {
   }
 
   stationDeleteButtonHandler(event) {
-    this.view.removeRowOfTable(event);
-    const stationName =
-      event.target.parentElement.parentElement.childNodes[1].innerText;
-    this.model.deleteStationInObj(stationName);
+    if (window.confirm('정말로 삭제하시겠습니까?')) {
+      this.view.removeRowOfTable(event);
+      const stationName =
+        event.target.parentElement.parentElement.childNodes[1].innerText;
+      this.model.deleteStationInObj(stationName);
+    }
   }
 }
