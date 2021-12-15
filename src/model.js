@@ -1,3 +1,5 @@
+import { KEY } from './util/constants.js';
+
 export default class SubwayModel {
   constructor() {
     this._stationObj = {};
@@ -26,5 +28,10 @@ export default class SubwayModel {
 
   getLocalStorage(key) {
     return JSON.parse(localStorage.getItem(key));
+  }
+
+  loadAllDataFromLocalStorage() {
+    this._stationObj = this.getLocalStorage(KEY.station);
+    this._lineObj = this.getLocalStorage(KEY.line);
   }
 }
