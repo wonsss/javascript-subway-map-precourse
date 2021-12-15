@@ -1,3 +1,5 @@
+import { CLASS } from './util/constants.js';
+
 export default class SubwayView {
   constructor(
     model,
@@ -22,29 +24,29 @@ export default class SubwayView {
   }
 
   hideAllTabs() {
-    this.stationManagerTab().classList.remove('show');
-    this.lineManagerTab().classList.remove('show');
-    this.sectionManagerTab().classList.remove('show');
-    this.mapPrintManagerTab().classList.remove('show');
+    this.stationManagerTab().classList.remove(CLASS.show);
+    this.lineManagerTab().classList.remove(CLASS.show);
+    this.sectionManagerTab().classList.remove(CLASS.show);
+    this.mapPrintManagerTab().classList.remove(CLASS.show);
   }
 
   showStationManagerTab() {
     this.hideAllTabs();
-    this.stationManagerTab().classList.add('show');
+    this.stationManagerTab().classList.add(CLASS.show);
   }
 
   showLineManagerTab() {
     this.hideAllTabs();
-    this.lineManagerTab().classList.add('show');
+    this.lineManagerTab().classList.add(CLASS.show);
   }
 
   showSectionManagerTab() {
     this.hideAllTabs();
-    this.sectionManagerTab().classList.add('show');
+    this.sectionManagerTab().classList.add(CLASS.show);
   }
 
   showMapPrintManagerTab() {
     this.hideAllTabs();
-    this.mapPrintManagerTab().classList.add('show');
+    this.mapPrintManagerTab().classList.add(CLASS.show);
   }
 }

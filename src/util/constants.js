@@ -24,6 +24,7 @@ const CLASS = Object.freeze({
   lineManagerTab: 'line-manager-tab',
   sectionManagerTab: 'section-manager-tab',
   mapPrintManagerTab: 'map-print-manager-tab',
+  show: 'show',
 });
 
 export { ID, CLASS };

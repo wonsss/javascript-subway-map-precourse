@@ -1,4 +1,3 @@
-import { ID, CLASS } from './util/constants.js';
 import * as $ from './util/elements.js';
 
 export default class SubwayController {
