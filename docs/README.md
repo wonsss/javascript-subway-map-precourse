@@ -44,16 +44,16 @@
 
 ### 3. [노선 관리] 지하철 노선 관련 기능
 
-- [ ] 지하철 노선을 등록하고 삭제할 수 있다.
+- [x] 지하철 노선을 등록하고 삭제할 수 있다.
 - [ ] 중복된 지하철 노선 이름이 등록될 수 없다.
-- [ ] 노선 등록 시 상행 종점역과 하행 종점역을 입력받는다.
-- [ ] 지하철 노선의 목록을 조회할 수 있다.
-- [ ] 지하철 노선의 이름을 입력하는 input 태그는 `#line-name-input` id값을 가진다.
+- [x] 노선 등록 시 상행 종점역과 하행 종점역을 입력받는다.
+- [x] 지하철 노선의 목록을 조회할 수 있다.
+- [x] 지하철 노선의 이름을 입력하는 input 태그는 `#line-name-input` id값을 가진다.
 - id, class
-  - [ ] 지하철 노선의 상행 종점을 선택하는 select 태그는 `#line-start-station-selector` id값을 가진다.
-  - [ ] 지하철 노선의 하행 종점을 선택하는 select 태그는 `#line-end-station-selector` id값을 가진다.
-  - [ ] 지하철 노선을 추가하는 button 태그는 `#line-add-button` id값을 가진다.
-  - [ ] 지하철 노선을 삭제하는 button 태그는 `.line-delete-button` class값을 가진다.
+  - [x] 지하철 노선의 상행 종점을 선택하는 select 태그는 `#line-start-station-selector` id값을 가진다.
+  - [x] 지하철 노선의 하행 종점을 선택하는 select 태그는 `#line-end-station-selector` id값을 가진다.
+  - [x] 지하철 노선을 추가하는 button 태그는 `#line-add-button` id값을 가진다.
+  - [x] 지하철 노선을 삭제하는 button 태그는 `.line-delete-button` class값을 가진다.
 
 ### 4. [구간 관리] 지하철 구간 추가 기능
 
@@ -63,7 +63,7 @@
 - [ ] 역과 역 사이에 새로운 역이 추가 될 수 있다.
 - [ ] 노선에서 갈래길은 생길 수 없다.
 - id, class
-  - [ ] 지하철 노선을 선택하는 button 태그는 `.section-line-menu-button` class값을 가진다.
+  - [x] 지하철 노선을 선택하는 button 태그는 `.section-line-menu-button` class값을 가진다.
   - [ ] 지하철 구간을 설정할 역 select 태그는 `#section-station-selector` id값을 가진다.
   - [ ] 지하철 구간의 순서를 입력하는 input 태그는 `#section-order-input` id값을 가진다.
   - [ ] 지하철 구간을 등록하는 button 태그는 `#section-add-button` id값을 가진다.
