@@ -32,11 +32,12 @@ export default class SubwayController {
       this.loadMapPrintManagerTab()
     );
     $.stationAddButton().addEventListener('click', e =>
-      this.addStation.call(this, e)
+      this.addStationHandler.call(this, e)
     );
   }
 
   loadStationManagerTab() {
+    this.view.clearTable($.stationTable());
     const stationObj = this.model.getLocalStorage(KEY.station);
     this.makeStationManagerTable(stationObj);
     this.view.showStationManagerTab();
@@ -65,7 +66,7 @@ export default class SubwayController {
     this.view.showMapPrintManagerTab();
   }
 
-  addStation(e) {
+  addStationHandler(e) {
     e.preventDefault();
     const stationName = $.stationNameInput().value;
     this.view.renderTable($.stationTable(), $.stationTbody(stationName));

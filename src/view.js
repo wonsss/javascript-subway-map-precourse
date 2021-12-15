@@ -45,4 +45,8 @@ export default class SubwayView {
   removeRowOfTable(event) {
     event.target.parentElement.parentElement.remove();
   }
+
+  clearTable(table) {
+    table.innerHTML = '';
+  }
 }
