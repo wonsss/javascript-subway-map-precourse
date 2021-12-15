@@ -45,7 +45,7 @@ export default class SubwayController {
   }
 
   loadTableInStationManagerTab() {
-    this.view.clearTable($.stationTable());
+    this.view.clearTarget($.stationTable());
     const stationObj = this.model.getLocalStorage(KEY.station) ?? {};
     Object.keys(stationObj).forEach(stationName => {
       this.view.renderTable($.stationTable(), $.stationTbody(stationName));
@@ -62,8 +62,8 @@ export default class SubwayController {
   }
 
   loadOptionsInLineManagerTab() {
-    this.view.clearOption($.lineStartStationSelector());
-    this.view.clearOption($.lineEndStationSelector());
+    this.view.clearTarget($.lineStartStationSelector());
+    this.view.clearTarget($.lineEndStationSelector());
     const { stationObj } = this.model;
     Object.keys(stationObj).forEach(stationName => {
       const optionHTML = $.lineStartStationSelectorOption(stationName);
@@ -72,7 +72,7 @@ export default class SubwayController {
   }
 
   loadTableInLineManagerTab() {
-    this.view.clearTable($.lineTable());
+    this.view.clearTarget($.lineTable());
     const lineObj = this.model.getLocalStorage(KEY.line) ?? {};
     Object.keys(lineObj).forEach(lineName => {
       this.view.renderTable(
@@ -90,7 +90,37 @@ export default class SubwayController {
   }
 
   loadSectionManagerTab() {
+    this.view.clearTarget($.lineListButtons());
+    const lineList = Object.keys(this.model.lineObj);
+    lineList.forEach(line => {
+      this.view.renderInTarget($.lineListButtons(), $.makeButton(line));
+    });
+    $.sectionLineMenuButtons().forEach(button => {
+      button.addEventListener('click', this.sectionLineMenuBtnHandler);
+    });
     this.view.showSectionManagerTab();
+  }
+
+  sectionLineMenuBtnHandler = e => {
+    $.eachSections().forEach(section => {
+      this.view.clearTarget(section);
+    });
+    const lineName = e.target.innerText;
+    const stationList = this.model.lineObj[lineName];
+    this.view.renderInTarget(
+      $.sectionManagerTab(),
+      $.eachSectionManagerTab(lineName, stationList)
+    );
+    this.loadOptionInSectionManagerTab();
+  };
+
+  loadOptionInSectionManagerTab() {
+    this.view.clearTarget($.sectionStationSelector());
+    const { stationObj } = this.model;
+    Object.keys(stationObj).forEach(stationName => {
+      const optionHTML = $.lineStartStationSelectorOption(stationName);
+      this.view.renderInSectionStationSelector(optionHTML);
+    });
   }
 
   loadMapPrintManagerTab() {

@@ -74,14 +74,6 @@ const elements = Object.freeze({
 <option value="${stationName}">${stationName}</option>
 `,
 
-  sectionManagerTabHTML: `
-<div class="${CLASS.sectionManagerTab}">3</div>
-`,
-
-  mapPrintManagerTabHTML: `
-<div class="${CLASS.mapPrintManagerTab}">4</div>
-`,
-
   stationTbody: name => `
 <tr>
   <td>${name}</td>
@@ -96,6 +88,37 @@ const elements = Object.freeze({
   <td>${endStation}</td>
   <td><button class="${CLASS.lineDeleteButton}">삭제</button></td>
 </tr>
+`,
+
+  sectionManagerTabHTML: `
+<div class="${CLASS.sectionManagerTab}">
+  <h3>구간을 수정할 노선을 선택주세요</h3>
+  <div id="${ID.lineListButtons}"></div>
+</div>
+`,
+
+  eachSectionManagerTab: (lineName, stationList) => `
+<div class="${CLASS.eachSection}">
+  <h3>${lineName}호선 관리</h3>
+  <h4>구간 등록</h4>
+  <form name="${ID.sectionAddButton}" >
+    <select id="${ID.sectionStationSelector}" name="${ID.sectionStationSelector}">
+    </select>
+
+    <input type="number" id="${ID.sectionOrderInput}" name="${ID.sectionOrderInput}" placeholder="순서"/>
+
+    <input type="submit" id="${ID.sectionAddButton}" value="등록"/>
+  </form>
+</div>
+
+`,
+
+  makeButton: name => `
+<button class="${CLASS.sectionLineMenuButton}">${name}</button>  
+`,
+
+  mapPrintManagerTabHTML: `
+<div class="${CLASS.mapPrintManagerTab}">4</div>
 `,
 
   app: () => document.getElementById(ID.app),
@@ -133,6 +156,8 @@ const elements = Object.freeze({
     document.querySelectorAll(`.${CLASS.sectionLineMenuButton}`),
   sectionDeleteButtons: () =>
     document.querySelectorAll(`.${CLASS.sectionDeleteButton}`),
+  lineListButtons: () => document.getElementById(ID.lineListButtons),
+  eachSections: () => document.querySelectorAll(`.${CLASS.eachSection}`),
 });
 
 export { elements };

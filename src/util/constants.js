@@ -15,6 +15,7 @@ const ID = Object.freeze({
   app: 'app',
   stationTable: 'station-table',
   lineTable: 'line-table',
+  lineListButtons: 'line-list-buttons',
 });
 
 const CLASS = Object.freeze({
@@ -27,6 +28,7 @@ const CLASS = Object.freeze({
   sectionManagerTab: 'section-manager-tab',
   mapPrintManagerTab: 'map-print-manager-tab',
   show: 'show',
+  eachSection: 'each-section',
 });
 
 const KEY = Object.freeze({

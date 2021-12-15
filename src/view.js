@@ -10,9 +10,17 @@ export default class SubwayView {
     this.$.app().insertAdjacentHTML(position, html);
   }
 
+  renderInTarget(target, html) {
+    target.insertAdjacentHTML('beforeend', html);
+  }
+
   renderInLineStartSelector(html) {
     this.$.lineStartStationSelector().insertAdjacentHTML('beforeend', html);
     this.$.lineEndStationSelector().insertAdjacentHTML('beforeend', html);
+  }
+
+  renderInSectionStationSelector(html) {
+    this.$.sectionStationSelector().insertAdjacentHTML('beforeend', html);
   }
 
   hideAllTabs() {
@@ -51,11 +59,9 @@ export default class SubwayView {
     event.target.parentElement.parentElement.remove();
   }
 
-  clearTable(table) {
-    table.innerHTML = '';
-  }
-
-  clearOption(selectTag) {
-    selectTag.innerHTML = '';
+  clearTarget(target) {
+    if (target) {
+      target.innerHTML = '';
+    }
   }
 }
