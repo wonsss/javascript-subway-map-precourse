@@ -28,4 +28,9 @@ const CLASS = Object.freeze({
   show: 'show',
 });
 
-export { ID, CLASS };
+const KEY = Object.freeze({
+  station: 'station',
+  line: 'line',
+});
+
+export { ID, CLASS, KEY };

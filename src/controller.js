@@ -1,4 +1,5 @@
 import { elements as $ } from './util/elements.js';
+import { KEY } from './util/constants.js';
 
 export default class SubwayController {
   constructor(model, view) {
@@ -13,7 +14,7 @@ export default class SubwayController {
     this.view.renderInApp('beforeend', $.sectionManagerTabHTML);
     this.view.renderInApp('beforeend', $.mapPrintManagerTabHTML);
     this.addAllEvents();
-    this.view.showStationManagerTab();
+    this.loadStationManagerTab();
   }
 
   addAllEvents() {
@@ -35,7 +36,21 @@ export default class SubwayController {
   }
 
   loadStationManagerTab() {
+    const stationObj = this.model.getLocalStorage(KEY.station);
+    console.log(stationObj);
+    this.makeStationManagerTable(stationObj);
     this.view.showStationManagerTab();
+  }
+
+  makeStationManagerTable(stationObj) {
+    Object.keys(stationObj).forEach(stationName => {
+      this.view.renderTable($.stationTable(), $.stationTbody(stationName));
+    });
+    $.stationDeleteButtons().forEach(button =>
+      button.addEventListener('click', event =>
+        this.view.removeRowOfTable(event)
+      )
+    );
   }
 
   loadLineManagerTab() {
@@ -60,6 +75,6 @@ export default class SubwayController {
       )
     );
     this.model.setStationObj(stationName);
-    console.log(this.model._stationObj);
+    this.model.setLocalStorage(KEY.station, this.model._stationObj);
   }
 }
