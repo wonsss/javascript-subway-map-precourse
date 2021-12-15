@@ -7,7 +7,11 @@ export default class SubwayModel {
   }
 
   get stationObj() {
-    return this._stationObj;
+    return this._stationObj ?? {};
+  }
+
+  get lineObj() {
+    return this._lineObj ?? {};
   }
 
   setStationObj(stationName) {
@@ -20,8 +24,9 @@ export default class SubwayModel {
     this.setLocalStorage(KEY.station, this._stationObj);
   }
 
-  setLineObjInitially(lineName, firstStation, lastStation) {
-    this._lineObj[lineName] = [firstStation, lastStation];
+  setLineObjInitially(lineName, startStation, endStation) {
+    this._lineObj[lineName] = [startStation, endStation];
+    this.setLocalStorage(KEY.line, this._lineObj);
   }
 
   addStationToLineObj(lineName, index, stationName) {
@@ -30,6 +35,11 @@ export default class SubwayModel {
       0,
       stationName
     );
+  }
+
+  deleteLineInObj(lineName) {
+    delete this._lineObj[lineName];
+    this.setLocalStorage(KEY.line, this._lineObj);
   }
 
   setLocalStorage(key, data) {
@@ -41,7 +51,7 @@ export default class SubwayModel {
   }
 
   loadAllDataFromLocalStorage() {
-    this._stationObj = this.getLocalStorage(KEY.station);
-    this._lineObj = this.getLocalStorage(KEY.line);
+    this._stationObj = this.getLocalStorage(KEY.station) ?? {};
+    this._lineObj = this.getLocalStorage(KEY.line) ?? {};
   }
 }

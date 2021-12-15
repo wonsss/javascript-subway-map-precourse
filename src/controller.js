@@ -40,24 +40,53 @@ export default class SubwayController {
   }
 
   loadStationManagerTab() {
+    this.loadTableInStationManagerTab();
+    this.view.showStationManagerTab();
+  }
+
+  loadTableInStationManagerTab() {
     this.view.clearTable($.stationTable());
-    const stationObj = this.model.getLocalStorage(KEY.station);
+    const stationObj = this.model.getLocalStorage(KEY.station) ?? {};
     Object.keys(stationObj).forEach(stationName => {
       this.view.renderTable($.stationTable(), $.stationTbody(stationName));
     });
     $.stationDeleteButtons().forEach(button =>
       button.addEventListener('click', this.stationDeleteBtnHandler)
     );
-    this.view.showStationManagerTab();
   }
 
   loadLineManagerTab() {
+    this.loadOptionsInLineManagerTab();
+    this.loadTableInLineManagerTab();
+    this.view.showLineManagerTab();
+  }
+
+  loadOptionsInLineManagerTab() {
+    this.view.clearOption($.lineStartStationSelector());
+    this.view.clearOption($.lineEndStationSelector());
     const { stationObj } = this.model;
     Object.keys(stationObj).forEach(stationName => {
       const optionHTML = $.lineStartStationSelectorOption(stationName);
       this.view.renderInLineStartSelector(optionHTML);
     });
-    this.view.showLineManagerTab();
+  }
+
+  loadTableInLineManagerTab() {
+    this.view.clearTable($.lineTable());
+    const lineObj = this.model.getLocalStorage(KEY.line) ?? {};
+    Object.keys(lineObj).forEach(lineName => {
+      this.view.renderTable(
+        $.lineTable(),
+        $.lineTbody(
+          lineName,
+          lineObj[lineName][0],
+          lineObj[lineName][lineObj[lineName].length - 1]
+        )
+      );
+    });
+    $.lineDeleteButtons().forEach(button =>
+      button.addEventListener('click', this.lineDeleteBtnHandler)
+    );
   }
 
   loadSectionManagerTab() {
@@ -95,10 +124,7 @@ export default class SubwayController {
     $.lineDeleteButtons().forEach(button =>
       button.addEventListener('click', this.lineDeleteBtnHandler)
     );
-  }
-
-  test(e) {
-    console.log(e.target);
+    this.model.setLineObjInitially(lineName, startStation, endStation);
   }
 
   stationDeleteBtnHandler = event => {
@@ -114,9 +140,9 @@ export default class SubwayController {
   lineDeleteBtnHandler = event => {
     if (window.confirm('정말로 삭제하시겠습니까?')) {
       this.view.removeRowOfTable(event);
-      //   const stationName =
-      //     event.target.parentElement.parentElement.childNodes[1].innerText;
-      //   this.model.deleteStationInObj(stationName);
+      const lineName =
+        event.target.parentElement.parentElement.childNodes[1].innerText;
+      this.model.deleteLineInObj(lineName);
     }
   };
 }

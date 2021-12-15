@@ -54,4 +54,8 @@ export default class SubwayView {
   clearTable(table) {
     table.innerHTML = '';
   }
+
+  clearOption(selectTag) {
+    selectTag.innerHTML = '';
+  }
 }
