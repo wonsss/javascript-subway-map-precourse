@@ -1,4 +1,4 @@
-import { HTML, ELEMENTS } from './util/elements.js';
+import { elements as $ } from './util/elements.js';
 
 export default class SubwayController {
   constructor(model, view) {
@@ -7,27 +7,30 @@ export default class SubwayController {
   }
 
   app() {
-    this.view.renderInApp('beforeend', HTML.topMenuContainerHTML);
-    this.view.renderInApp('beforeend', HTML.stationManagerTabHTML);
-    this.view.renderInApp('beforeend', HTML.lineManagerTabHTML);
-    this.view.renderInApp('beforeend', HTML.sectionManagerTabHTML);
-    this.view.renderInApp('beforeend', HTML.mapPrintManagerTabHTML);
+    this.view.renderInApp('beforeend', $.topMenuContainerHTML);
+    this.view.renderInApp('beforeend', $.stationManagerTabHTML);
+    this.view.renderInApp('beforeend', $.lineManagerTabHTML);
+    this.view.renderInApp('beforeend', $.sectionManagerTabHTML);
+    this.view.renderInApp('beforeend', $.mapPrintManagerTabHTML);
     this.addAllEvents();
     this.view.showStationManagerTab();
   }
 
   addAllEvents() {
-    ELEMENTS.stationManagerButton().addEventListener('click', () =>
+    $.stationManagerButton().addEventListener('click', () =>
       this.loadStationManagerTab()
     );
-    ELEMENTS.lineManagerButton().addEventListener('click', () =>
+    $.lineManagerButton().addEventListener('click', () =>
       this.loadLineManagerTab()
     );
-    ELEMENTS.sectionManagerButton().addEventListener('click', () =>
+    $.sectionManagerButton().addEventListener('click', () =>
       this.loadSectionManagerTab()
     );
-    ELEMENTS.mapPrintManagerButton().addEventListener('click', () =>
+    $.mapPrintManagerButton().addEventListener('click', () =>
       this.loadMapPrintManagerTab()
+    );
+    $.stationAddButton().addEventListener('click', e =>
+      this.addStation.call(this, e)
     );
   }
 
@@ -45,5 +48,13 @@ export default class SubwayController {
 
   loadMapPrintManagerTab() {
     this.view.showMapPrintManagerTab();
+  }
+
+  addStation(e) {
+    e.preventDefault();
+    this.view.renderTable(
+      $.stationTable(),
+      $.stationTbody($.stationNameInput().value)
+    );
   }
 }

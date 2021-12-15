@@ -1,6 +1,6 @@
 import { ID, CLASS } from './constants.js';
 
-const HTML = {
+const elements = Object.freeze({
   topMenuContainerHTML: `      
 <div>
     <button id="${ID.stationManagerButton}">1. 역 관리</button>
@@ -42,9 +42,14 @@ const HTML = {
   mapPrintManagerTabHTML: `
 <div class="${CLASS.mapPrintManagerTab}">4</div>
 `,
-};
 
-const ELEMENTS = {
+  stationTbody: name => `
+<tr>
+  <td>${name}</td>
+  <td><button class="${CLASS.stationDeleteButton}">삭제</button></td>
+</tr>
+  `,
+
   app: () => document.getElementById(ID.app),
   stationManagerButton: () => document.getElementById(ID.stationManagerButton),
   lineManagerButton: () => document.getElementById(ID.lineManagerButton),
@@ -78,6 +83,6 @@ const ELEMENTS = {
     document.querySelector(`.${CLASS.sectionLineMenuButton}`),
   sectionDeleteButton: () =>
     document.querySelector(`.${CLASS.sectionDeleteButton}`),
-};
+});
 
-export { HTML, ELEMENTS };
+export { elements };
