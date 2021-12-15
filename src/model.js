@@ -1,3 +1,22 @@
 export default class SubwayModel {
-  constructor() {}
+  constructor() {
+    this._stationObj = {};
+    this._lineObj = {};
+  }
+
+  setStationObj(stationName) {
+    this._stationObj[stationName] = { lineName: null };
+  }
+
+  setLineObjInitially(lineName, firstStation, lastStation) {
+    this._lineObj[lineName] = [firstStation, lastStation];
+  }
+
+  addStationToLineObj(lineName, index, stationName) {
+    this._lineObj[lineName] = this._lineObj[lineName].splice(
+      index,
+      0,
+      stationName
+    );
+  }
 }

@@ -52,14 +52,14 @@ export default class SubwayController {
 
   addStation(e) {
     e.preventDefault();
-    this.view.renderTable(
-      $.stationTable(),
-      $.stationTbody($.stationNameInput().value)
-    );
+    const stationName = $.stationNameInput().value;
+    this.view.renderTable($.stationTable(), $.stationTbody(stationName));
     $.stationDeleteButtons().forEach(button =>
       button.addEventListener('click', event =>
         this.view.removeRowOfTable(event)
       )
     );
+    this.model.setStationObj(stationName);
+    console.log(this.model._stationObj);
   }
 }
