@@ -19,12 +19,17 @@
 ### 1. 기본 DOM 구현
 
 - [ ] 상단에 메뉴 버튼 4개(역관리, 노선관리, 구간관리, 지하철노선도출력)를 생성하고 각각 탭 전환 이벤트를 추가한다.
+- id
+  - [x] 역 관리 Tab의 id `station-manager-tab`
+  - [x] 노선 관리 Tab의 id `line-manager-tab`
+  - [x] 구간 관리 Tab의 id `section-manager-tab`
+  - [x] 지하철 노선도 출력 관리 Tab의 id `map-print-manager-tab`
 - [ ] 각각 탭의 div는 클래스를 토글하는 이벤트를 붙여서 visibility를 관리한다.
 - id, class
-  - [ ] 역 관리 button 태그는 `#station-manager-button` id값을 가진다.
-  - [ ] 노선 관리 button 태그는 `#line-manager-button` id값을 가진다.
-  - [ ] 구간 관리 button 태그는 `#section-manager-button` id값을 가진다.
-  - [ ] 지하철 노선도 출력 관리 button 태그는 `#map-print-manager-button` id값을 가진다.
+  - [x] 역 관리 button 태그는 `#station-manager-button` id값을 가진다.
+  - [x] 노선 관리 button 태그는 `#line-manager-button` id값을 가진다.
+  - [x] 구간 관리 button 태그는 `#section-manager-button` id값을 가진다.
+  - [x] 지하철 노선도 출력 관리 button 태그는 `#map-print-manager-button` id값을 가진다.
 
 ### 2. [역 관리] 지하철 역 관련 기능
 
