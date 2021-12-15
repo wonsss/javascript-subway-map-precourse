@@ -56,5 +56,10 @@ export default class SubwayController {
       $.stationTable(),
       $.stationTbody($.stationNameInput().value)
     );
+    $.stationDeleteButtons().forEach(button =>
+      button.addEventListener('click', event =>
+        this.view.removeRowOfTable(event)
+      )
+    );
   }
 }

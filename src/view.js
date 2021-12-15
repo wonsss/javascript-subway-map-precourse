@@ -41,4 +41,8 @@ export default class SubwayView {
     table.insertAdjacentHTML('beforeend', data);
     this.$.stationNameInput().value = '';
   }
+
+  removeRowOfTable(event) {
+    event.target.parentElement.parentElement.remove();
+  }
 }

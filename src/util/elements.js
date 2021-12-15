@@ -15,7 +15,7 @@ const elements = Object.freeze({
   <h3>역 이름</h3>
   <form>
     <input type="text" id="${ID.stationNameInput}" placeholder="역 이름을 입력해주세요."/>
-    <input type="submit" id="${ID.stationAddButton}" placeholder="역 추가"/>
+    <input type="submit" id="${ID.stationAddButton}" value="역 추가"/>
   </form>
   <h2>지하철 역 목록</h2>
   <table>
@@ -76,8 +76,8 @@ const elements = Object.freeze({
     document.querySelector(`.${CLASS.sectionManagerTab}`),
   mapPrintManagerTab: () =>
     document.querySelector(`.${CLASS.mapPrintManagerTab}`),
-  stationDeleteButton: () =>
-    document.querySelector(`.${CLASS.stationDeleteButton}`),
+  stationDeleteButtons: () =>
+    document.querySelectorAll(`.${CLASS.stationDeleteButton}`),
   lineDeleteButton: () => document.querySelector(`.${CLASS.lineDeleteButton}`),
   sectionLineMenuButton: () =>
     document.querySelector(`.${CLASS.sectionLineMenuButton}`),
