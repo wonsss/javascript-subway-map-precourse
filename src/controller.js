@@ -1,4 +1,4 @@
-import * as $ from './util/elements.js';
+import { HTML, ELEMENTS } from './util/elements.js';
 
 export default class SubwayController {
   constructor(model, view) {
@@ -7,29 +7,26 @@ export default class SubwayController {
   }
 
   app() {
-    this.view.renderInApp('beforeend', $.topMenuContainerHTML);
-    this.view.renderInApp('beforeend', $.stationManagerTabHTML);
-    this.view.renderInApp('beforeend', $.lineManagerTabHTML);
-    this.view.renderInApp('beforeend', $.sectionManagerTabHTML);
-    this.view.renderInApp('beforeend', $.mapPrintManagerTabHTML);
+    this.view.renderInApp('beforeend', HTML.topMenuContainerHTML);
+    this.view.renderInApp('beforeend', HTML.stationManagerTabHTML);
+    this.view.renderInApp('beforeend', HTML.lineManagerTabHTML);
+    this.view.renderInApp('beforeend', HTML.sectionManagerTabHTML);
+    this.view.renderInApp('beforeend', HTML.mapPrintManagerTabHTML);
     this.addAllEvents();
     this.view.showStationManagerTab();
   }
 
   addAllEvents() {
-    $.stationManagerButton().addEventListener('click', () =>
+    ELEMENTS.stationManagerButton().addEventListener('click', () =>
       this.loadStationManagerTab()
     );
-
-    $.lineManagerButton().addEventListener('click', () =>
+    ELEMENTS.lineManagerButton().addEventListener('click', () =>
       this.loadLineManagerTab()
     );
-
-    $.sectionManagerButton().addEventListener('click', () =>
+    ELEMENTS.sectionManagerButton().addEventListener('click', () =>
       this.loadSectionManagerTab()
     );
-
-    $.mapPrintManagerButton().addEventListener('click', () =>
+    ELEMENTS.mapPrintManagerButton().addEventListener('click', () =>
       this.loadMapPrintManagerTab()
     );
   }

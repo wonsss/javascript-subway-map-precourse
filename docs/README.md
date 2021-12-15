@@ -38,9 +38,9 @@
 - [ ] 지하철 역은 2글자 이상이어야 한다.
 - [ ] 지하철 역의 목록을 조회할 수 있다.
 - id, class
-  - [ ] 지하철 역을 입력하는 input 태그는 `#station-name-input` id값을 가진다.
-  - [ ] 지하철 역을 추가하는 button 태그는 `#station-add-button` id값을 가진다.
-  - [ ] 지하철 역을 삭제하는 button 태그는 `.station-delete-button` class값을 가진다.
+  - [x] 지하철 역을 입력하는 input 태그는 `#station-name-input` id값을 가진다.
+  - [x] 지하철 역을 추가하는 button 태그는 `#station-add-button` id값을 가진다.
+  - [x] 지하철 역을 삭제하는 button 태그는 `.station-delete-button` class값을 가진다.
 
 ### 3. [노선 관리] 지하철 노선 관련 기능
 

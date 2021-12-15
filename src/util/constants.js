@@ -13,6 +13,7 @@ const ID = Object.freeze({
   sectionOrderInput: 'section-order-input',
   sectionAddButton: 'section-add-button',
   app: 'app',
+  stationTable: 'station-table',
 });
 
 const CLASS = Object.freeze({

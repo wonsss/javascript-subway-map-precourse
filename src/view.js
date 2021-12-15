@@ -1,22 +1,13 @@
 import { CLASS } from './util/constants.js';
 
 export default class SubwayView {
-  constructor(
-    model,
-    {
-      app,
-      stationManagerTab,
-      lineManagerTab,
-      sectionManagerTab,
-      mapPrintManagerTab,
-    }
-  ) {
+  constructor(model, ELEMENTS) {
     this.model = model;
-    this.app = app;
-    this.stationManagerTab = stationManagerTab;
-    this.lineManagerTab = lineManagerTab;
-    this.sectionManagerTab = sectionManagerTab;
-    this.mapPrintManagerTab = mapPrintManagerTab;
+    this.app = ELEMENTS.app;
+    this.stationManagerTab = ELEMENTS.stationManagerTab;
+    this.lineManagerTab = ELEMENTS.lineManagerTab;
+    this.sectionManagerTab = ELEMENTS.sectionManagerTab;
+    this.mapPrintManagerTab = ELEMENTS.mapPrintManagerTab;
   }
 
   renderInApp(position, html) {
