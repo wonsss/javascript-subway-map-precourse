@@ -51,6 +51,11 @@ export default class SubwayController {
   }
 
   loadLineManagerTab() {
+    const { stationObj } = this.model;
+    Object.keys(stationObj).forEach(stationName => {
+      const optionHTML = $.lineStartStationSelectorOption(stationName);
+      this.view.renderInLineStartSelector(optionHTML);
+    });
     this.view.showLineManagerTab();
   }
 

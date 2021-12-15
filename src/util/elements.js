@@ -32,7 +32,26 @@ const elements = Object.freeze({
 `,
 
   lineManagerTabHTML: `
-<div class="${CLASS.lineManagerTab}">2</div>
+<div class="${CLASS.lineManagerTab}">
+  <h3>노선 이름</h3>
+  <form>
+    <input type="text" id="${ID.lineNameInput}" placeholder="노선 이름을 입력해주세요."/>
+    <br/>
+    <label for="${ID.lineStartStationSelector}">상행 종점</label>
+    <select id="${ID.lineStartStationSelector}" name="${ID.lineStartStationSelector}">
+    </select>
+    <br/>
+    <label for="${ID.lineEndStationSelector}">하행 종점</label>
+    <select id="${ID.lineEndStationSelector}" name="${ID.lineEndStationSelector}">
+    </select>
+    <br/>
+    <input type="submit" id="${ID.lineAddButton}" value="노선 추가"/>
+  </form>
+</div>
+`,
+
+  lineStartStationSelectorOption: stationName => `
+<option value="${stationName}">${stationName}</option>
 `,
 
   sectionManagerTabHTML: `

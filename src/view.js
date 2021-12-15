@@ -10,6 +10,11 @@ export default class SubwayView {
     this.$.app().insertAdjacentHTML(position, html);
   }
 
+  renderInLineStartSelector(html) {
+    this.$.lineStartStationSelector().insertAdjacentHTML('beforeend', html);
+    this.$.lineEndStationSelector().insertAdjacentHTML('beforeend', html);
+  }
+
   hideAllTabs() {
     this.$.stationManagerTab().classList.remove(CLASS.show);
     this.$.lineManagerTab().classList.remove(CLASS.show);
