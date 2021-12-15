@@ -1,5 +1,5 @@
-import * as $ from './util/dom.js';
 import { ID, CLASS } from './util/constants.js';
+import * as $ from './util/elements.js';
 
 export default class SubwayController {
   constructor(model, view) {
@@ -8,10 +8,46 @@ export default class SubwayController {
   }
 
   app() {
-    this.view.renderInApp('beforeend', $.topMenuContainer);
-    this.view.renderInApp('beforeend', $.stationManagerTab);
-    this.view.renderInApp('beforeend', $.lineManagerTab);
-    this.view.renderInApp('beforeend', $.sectionManagerTab);
-    this.view.renderInApp('beforeend', $.mapPrintManagerTab);
+    this.view.renderInApp('beforeend', $.topMenuContainerHTML);
+    this.view.renderInApp('beforeend', $.stationManagerTabHTML);
+    this.view.renderInApp('beforeend', $.lineManagerTabHTML);
+    this.view.renderInApp('beforeend', $.sectionManagerTabHTML);
+    this.view.renderInApp('beforeend', $.mapPrintManagerTabHTML);
+    this.addAllEvents();
+    this.view.showStationManagerTab();
+  }
+
+  addAllEvents() {
+    $.stationManagerButton().addEventListener('click', () =>
+      this.loadStationManagerTab()
+    );
+
+    $.lineManagerButton().addEventListener('click', () =>
+      this.loadLineManagerTab()
+    );
+
+    $.sectionManagerButton().addEventListener('click', () =>
+      this.loadSectionManagerTab()
+    );
+
+    $.mapPrintManagerButton().addEventListener('click', () =>
+      this.loadMapPrintManagerTab()
+    );
+  }
+
+  loadStationManagerTab() {
+    this.view.showStationManagerTab();
+  }
+
+  loadLineManagerTab() {
+    this.view.showLineManagerTab();
+  }
+
+  loadSectionManagerTab() {
+    this.view.showSectionManagerTab();
+  }
+
+  loadMapPrintManagerTab() {
+    this.view.showMapPrintManagerTab();
   }
 }

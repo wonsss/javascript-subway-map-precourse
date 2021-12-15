@@ -11,7 +11,7 @@
 ### 유틸 분리
 
 - [ ] 숫자나 문자열을 하드코딩하지 않고 상수로 만들어 별도의 파일에 모은다. (constants.js)
-- [ ] dom의 엘리먼트를 별도의 파일에 모아서 유지보수하기 쉽게 모듈화한다.(dom.js)
+- [ ] HTML의 Elements를 별도의 파일에 모아서 유지보수하기 쉽게 모듈화한다.(elements.js)
 - [ ] 프로젝트 공통으로 사용될 수 있는 함수들을 모아서 모듈화한다.(helper.js)
 
 ## 기능 구현 목록
@@ -19,11 +19,11 @@
 ### 1. 기본 DOM 구현
 
 - [ ] 상단에 메뉴 버튼 4개(역관리, 노선관리, 구간관리, 지하철노선도출력)를 생성하고 각각 탭 전환 이벤트를 추가한다.
-- id
-  - [x] 역 관리 Tab의 id `station-manager-tab`
-  - [x] 노선 관리 Tab의 id `line-manager-tab`
-  - [x] 구간 관리 Tab의 id `section-manager-tab`
-  - [x] 지하철 노선도 출력 관리 Tab의 id `map-print-manager-tab`
+- class
+  - [x] 역 관리 Tab의 class `.station-manager-tab`
+  - [x] 노선 관리 Tab의 class `.line-manager-tab`
+  - [x] 구간 관리 Tab의 class `.section-manager-tab`
+  - [x] 지하철 노선도 출력 관리 Tab의 class `.map-print-manager-tab`
 - [ ] 각각 탭의 div는 클래스를 토글하는 이벤트를 붙여서 visibility를 관리한다.
 - id, class
   - [x] 역 관리 button 태그는 `#station-manager-button` id값을 가진다.

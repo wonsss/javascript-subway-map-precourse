@@ -1,9 +1,5 @@
 const ID = Object.freeze({
-  stationManagerTab: 'station-manager-tab',
-  lineManagerTab: 'line-manager-tab',
-  sectionManagerTab: 'section-manager-tab',
-  mapPrintManagerTab: 'map-print-manager-tab',
-  stationManageButton: 'station-manager-button',
+  stationManagerButton: 'station-manager-button',
   lineManagerButton: 'line-manager-button',
   sectionManagerButton: 'section-manager-button',
   mapPrintManagerButton: 'map-print-manager-button',
@@ -16,13 +12,18 @@ const ID = Object.freeze({
   sectionStationSelector: 'section-station-selector',
   sectionOrderInput: 'section-order-input',
   sectionAddButton: 'section-add-button',
+  app: 'app',
 });
 
 const CLASS = Object.freeze({
-  stationDeleteButton: '.station-delete-button',
-  lineDeleteButton: '.line-delete-button',
-  sectionLineMenuButton: '.section-line-menu-button',
-  sectionDeleteButton: '.section-delete-button',
+  stationDeleteButton: 'station-delete-button',
+  lineDeleteButton: 'line-delete-button',
+  sectionLineMenuButton: 'section-line-menu-button',
+  sectionDeleteButton: 'section-delete-button',
+  stationManagerTab: 'station-manager-tab',
+  lineManagerTab: 'line-manager-tab',
+  sectionManagerTab: 'section-manager-tab',
+  mapPrintManagerTab: 'map-print-manager-tab',
 });
 
 export { ID, CLASS };
