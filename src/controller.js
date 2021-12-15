@@ -1,4 +1,5 @@
 import * as $ from './util/dom.js';
+import { SELECTOR } from './util/constants.js';
 
 export default class SubwayController {
   constructor(model, view) {
