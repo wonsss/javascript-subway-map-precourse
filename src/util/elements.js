@@ -97,20 +97,36 @@ const elements = Object.freeze({
 </div>
 `,
 
-  eachSectionManagerTab: (lineName, stationList) => `
+  eachSectionManagerTab: lineName => `
 <div class="${CLASS.eachSection}">
-  <h3>${lineName}호선 관리</h3>
+  <h3>${lineName} 관리</h3>
   <h4>구간 등록</h4>
   <form name="${ID.sectionAddButton}" >
     <select id="${ID.sectionStationSelector}" name="${ID.sectionStationSelector}">
     </select>
-
     <input type="number" id="${ID.sectionOrderInput}" name="${ID.sectionOrderInput}" placeholder="순서"/>
-
     <input type="submit" id="${ID.sectionAddButton}" value="등록"/>
   </form>
+  <br/>
+  <table>
+    <thead>
+        <tr>
+          <th>순서</th>
+          <th>이름</th>
+          <th>설정</th>
+        </tr>
+    </thead>
+    <tbody id="${ID.sectionTable}"></tbody>
+  </table>
 </div>
+`,
 
+  sectionTbody: (index, stationName) => `
+<tr>
+  <td>${index}</td>
+  <td>${stationName}</td>
+  <td><button class="${CLASS.sectionDeleteButton}">삭제</button></td>
+</tr>
 `,
 
   makeButton: name => `
@@ -141,6 +157,7 @@ const elements = Object.freeze({
   sectionAddButton: () => document.getElementById(ID.sectionAddButton),
   stationTable: () => document.getElementById(ID.stationTable),
   lineTable: () => document.getElementById(ID.lineTable),
+  sectionTable: () => document.getElementById(ID.sectionTable),
   stationManagerTab: () =>
     document.querySelector(`.${CLASS.stationManagerTab}`),
   lineManagerTab: () => document.querySelector(`.${CLASS.lineManagerTab}`),

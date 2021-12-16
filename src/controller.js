@@ -106,13 +106,29 @@ export default class SubwayController {
       this.view.clearTarget(section);
     });
     const lineName = e.target.innerText;
-    const stationList = this.model.lineObj[lineName];
+    // const stationList = this.model.lineObj[lineName];
     this.view.renderInTarget(
       $.sectionManagerTab(),
-      $.eachSectionManagerTab(lineName, stationList)
+      $.eachSectionManagerTab(lineName)
     );
     this.loadOptionInSectionManagerTab();
+    this.loadTableInSectionManagerTab(lineName);
+    $.sectionAddButton().addEventListener('click', event =>
+      this.registerStationToSection(event, lineName)
+    );
   };
+
+  registerStationToSection(event, lineName) {
+    event.preventDefault();
+    const stationName =
+      document.forms[ID.sectionAddButton].elements[ID.sectionStationSelector]
+        .value;
+    const order =
+      document.forms[ID.sectionAddButton].elements[ID.sectionOrderInput].value;
+    this.model.addStationToLineObj(lineName, order, stationName);
+    this.loadTableInSectionManagerTab(lineName);
+    this.model.setLocalStorage(KEY.line, this.model.lineObj);
+  }
 
   loadOptionInSectionManagerTab() {
     this.view.clearTarget($.sectionStationSelector());
@@ -121,6 +137,20 @@ export default class SubwayController {
       const optionHTML = $.lineStartStationSelectorOption(stationName);
       this.view.renderInSectionStationSelector(optionHTML);
     });
+  }
+
+  loadTableInSectionManagerTab(lineName) {
+    this.view.clearTarget($.sectionTable());
+    const lineStationList = this.model.lineObj[lineName];
+    for (let i = 0; i < lineStationList.length; i++) {
+      this.view.renderTable(
+        $.sectionTable(),
+        $.sectionTbody(i, lineStationList[i])
+      );
+    }
+    $.lineDeleteButtons().forEach(button =>
+      button.addEventListener('click', this.lineDeleteBtnHandler)
+    );
   }
 
   loadMapPrintManagerTab() {

@@ -15,31 +15,27 @@ export default class SubwayModel {
   }
 
   setStationObj(stationName) {
-    this._stationObj[stationName] = { lineName: null };
-    this.setLocalStorage(KEY.station, this._stationObj);
+    this.stationObj[stationName] = { lineName: null };
+    this.setLocalStorage(KEY.station, this.stationObj);
   }
 
   deleteStationInObj(stationName) {
     delete this._stationObj[stationName];
-    this.setLocalStorage(KEY.station, this._stationObj);
+    this.setLocalStorage(KEY.station, this.stationObj);
   }
 
   setLineObjInitially(lineName, startStation, endStation) {
-    this._lineObj[lineName] = [startStation, endStation];
-    this.setLocalStorage(KEY.line, this._lineObj);
+    this.lineObj[lineName] = [startStation, endStation];
+    this.setLocalStorage(KEY.line, this.lineObj);
   }
 
-  addStationToLineObj(lineName, index, stationName) {
-    this._lineObj[lineName] = this._lineObj[lineName].splice(
-      index,
-      0,
-      stationName
-    );
+  addStationToLineObj(lineName, order, stationName) {
+    this.lineObj[lineName].splice(order, 0, stationName);
   }
 
   deleteLineInObj(lineName) {
-    delete this._lineObj[lineName];
-    this.setLocalStorage(KEY.line, this._lineObj);
+    delete this.lineObj[lineName];
+    this.setLocalStorage(KEY.line, this.lineObj);
   }
 
   setLocalStorage(key, data) {
