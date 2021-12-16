@@ -1,5 +1,5 @@
 import { elements as $ } from './util/elements.js';
-import { ID, KEY } from './util/constants.js';
+import { ID, KEY, MESSAGE } from './util/constants.js';
 
 export default class SubwayController {
   constructor(model, view) {
@@ -8,11 +8,11 @@ export default class SubwayController {
   }
 
   app() {
-    this.view.renderInApp('beforeend', $.topMenuContainerHTML);
-    this.view.renderInApp('beforeend', $.stationManagerTabHTML);
-    this.view.renderInApp('beforeend', $.lineManagerTabHTML);
-    this.view.renderInApp('beforeend', $.sectionManagerTabHTML);
-    this.view.renderInApp('beforeend', $.mapPrintManagerTabHTML);
+    this.view.renderInTarget($.app(), $.topMenuContainerHTML);
+    this.view.renderInTarget($.app(), $.stationManagerTabHTML);
+    this.view.renderInTarget($.app(), $.lineManagerTabHTML);
+    this.view.renderInTarget($.app(), $.sectionManagerTabHTML);
+    this.view.renderInTarget($.app(), $.mapPrintManagerTabHTML);
     this.addAllEvents();
     this.model.loadAllDataFromLocalStorage();
     this.loadStationManagerTab();
@@ -107,7 +107,6 @@ export default class SubwayController {
     });
     const lineName = e.target.innerText;
     this.currentLine = lineName;
-    // const stationList = this.model.lineObj[lineName];
     this.view.renderInTarget(
       $.sectionManagerTab(),
       $.eachSectionManagerTab(lineName)
@@ -161,7 +160,7 @@ export default class SubwayController {
       return;
     }
 
-    if (window.confirm('정말로 삭제하시겠습니까?')) {
+    if (window.confirm(MESSAGE.confirmOfDelete)) {
       const order =
         event.target.parentElement.parentElement.childNodes[1].innerText;
       this.model.deleteStationFromLineObj(lineName, order);
@@ -172,18 +171,18 @@ export default class SubwayController {
 
   checkStationBeforeDeleteFromSection(lineName) {
     if (this.model.lineObj[lineName].length < 3) {
-      alert('노선에 포함된 역이 두개 이하일 때는 역을 제거할 수 없습니다.');
+      alert(MESSAGE.alertOfUnderTwoStation);
       return true;
     }
   }
 
   loadMapPrintManagerTab() {
     this.view.clearTarget($.mapDiv());
-    this.view.renderInTarget($.mapDiv(), this.printEachLine());
+    this.view.renderInTarget($.mapDiv(), this.createEachLineHTML());
     this.view.showMapPrintManagerTab();
   }
 
-  printEachLine() {
+  createEachLineHTML() {
     const { lineObj } = this.model;
     const lineNameList = Object.keys(lineObj);
     let html = '';
@@ -216,12 +215,12 @@ export default class SubwayController {
 
   checkStationBeforeRegister(stationName) {
     if (stationName.length < 2) {
-      alert('지하철 역은 2글자 이상이어야 합니다');
+      alert(MESSAGE.alertOfShortStationName);
       return true;
     }
     for (const station in this.model.stationObj) {
       if (station === stationName) {
-        alert('중복된 지하철 역 이름은 등록될 수 없습니다.');
+        alert(MESSAGE.alertOfStationNameThatAlreadyExists);
         return true;
       }
     }
@@ -253,7 +252,7 @@ export default class SubwayController {
   checkLineBeforeRegister(lineName) {
     for (const line in this.model.lineObj) {
       if (line === lineName) {
-        alert('중복된 지하철 노선 이름은 등록될 수 없습니다.');
+        alert(MESSAGE.alertOfLineNameThatAlreadyExists);
         return true;
       }
     }
@@ -263,7 +262,7 @@ export default class SubwayController {
     const stationName =
       event.target.parentElement.parentElement.childNodes[1].innerText;
     if (this.checkStationIfRegistered(stationName)) return;
-    if (!window.confirm('정말로 삭제하시겠습니까?')) return;
+    if (!window.confirm(MESSAGE.confirmOfDelete)) return;
 
     this.view.removeRowOfTable(event);
     this.model.deleteStationInObj(stationName);
@@ -277,7 +276,7 @@ export default class SubwayController {
     function checkLine(lineObj, line, stationName) {
       for (let i = 0; i < lineObj[line].length; i++) {
         if (lineObj[line][i] === stationName) {
-          alert('노선에 등록된 역은 삭제할 수 없습니다.');
+          alert(MESSAGE.alertOfCannotDeleteStationRegistered);
           return true;
         }
       }
@@ -285,7 +284,7 @@ export default class SubwayController {
   }
 
   lineDeleteBtnHandler = event => {
-    if (window.confirm('정말로 삭제하시겠습니까?')) {
+    if (window.confirm(MESSAGE.confirmOfDelete)) {
       this.view.removeRowOfTable(event);
       const lineName =
         event.target.parentElement.parentElement.childNodes[1].innerText;

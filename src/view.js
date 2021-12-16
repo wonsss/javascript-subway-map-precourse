@@ -6,10 +6,6 @@ export default class SubwayView {
     this.$ = elements;
   }
 
-  renderInApp(position, html) {
-    this.$.app().insertAdjacentHTML(position, html);
-  }
-
   renderInTarget(target, html) {
     target.insertAdjacentHTML('beforeend', html);
   }
