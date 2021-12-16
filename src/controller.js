@@ -177,7 +177,7 @@ export default class SubwayController {
     $.stationDeleteButtons().forEach(button =>
       button.addEventListener('click', this.stationDeleteBtnHandler)
     );
-    this.model.setStationObj(stationName);
+    this.model.setStationObj(stationName, false);
   }
 
   addLineBtnHandler(e) {
@@ -201,13 +201,24 @@ export default class SubwayController {
   }
 
   stationDeleteBtnHandler = event => {
-    console.log(event);
-    if (window.confirm('정말로 삭제하시겠습니까?')) {
-      this.view.removeRowOfTable(event);
-      const stationName =
-        event.target.parentElement.parentElement.childNodes[1].innerText;
-      this.model.deleteStationInObj(stationName);
+    const stationName =
+      event.target.parentElement.parentElement.childNodes[1].innerText;
+    const { lineObj } = this.model;
+    for (const line in lineObj) {
+      if (Object.hasOwnProperty.call(lineObj, line)) {
+        for (let i = 0; i < lineObj[line].length; i++) {
+          if (lineObj[line][i] === stationName) {
+            alert('노선에 등록된 역은 삭제할 수 없습니다.');
+            return;
+          }
+        }
+      }
     }
+    if (!window.confirm('정말로 삭제하시겠습니까?')) {
+      return;
+    }
+    this.view.removeRowOfTable(event);
+    this.model.deleteStationInObj(stationName);
   };
 
   lineDeleteBtnHandler = event => {
