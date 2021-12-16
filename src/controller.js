@@ -178,7 +178,27 @@ export default class SubwayController {
   }
 
   loadMapPrintManagerTab() {
+    this.view.clearTarget($.mapDiv());
+    this.view.renderInTarget($.mapDiv(), this.printEachLine());
     this.view.showMapPrintManagerTab();
+  }
+
+  printEachLine() {
+    const { lineObj } = this.model;
+    const lineNameList = Object.keys(lineObj);
+    let html = '';
+    lineNameList.forEach(lineName => {
+      html += `
+<h2>${lineName}</h2>
+<ul>`;
+      lineObj[lineName].forEach(station => {
+        html += `
+<li>${station}</li>
+              `;
+      });
+      html += `</ul>`;
+    });
+    return html;
   }
 
   addStationBtnHandler(e) {

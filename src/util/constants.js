@@ -30,6 +30,7 @@ const CLASS = Object.freeze({
   mapPrintManagerTab: 'map-print-manager-tab',
   show: 'show',
   eachSection: 'each-section',
+  map: 'map',
 });
 
 const KEY = Object.freeze({

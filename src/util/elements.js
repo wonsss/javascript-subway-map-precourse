@@ -125,7 +125,7 @@ const elements = Object.freeze({
 <tr>
   <td>${index}</td>
   <td>${stationName}</td>
-  <td><button class="${CLASS.sectionDeleteButton}">노선에서 제거</button></td>
+  <td><button class="${CLASS.sectionDeleteButton}">삭제</button></td>
 </tr>
 `,
 
@@ -134,7 +134,9 @@ const elements = Object.freeze({
 `,
 
   mapPrintManagerTabHTML: `
-<div class="${CLASS.mapPrintManagerTab}">4</div>
+<div class="${CLASS.mapPrintManagerTab}">
+  <div class="${CLASS.map}"></div>  
+</div>
 `,
 
   app: () => document.getElementById(ID.app),
@@ -175,6 +177,7 @@ const elements = Object.freeze({
     document.querySelectorAll(`.${CLASS.sectionDeleteButton}`),
   lineListButtons: () => document.getElementById(ID.lineListButtons),
   eachSections: () => document.querySelectorAll(`.${CLASS.eachSection}`),
+  mapDiv: () => document.querySelector(`.${CLASS.map}`),
 });
 
 export { elements };
