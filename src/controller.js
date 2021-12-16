@@ -157,6 +157,10 @@ export default class SubwayController {
   }
 
   sectionDeleteBtnHandler = (event, lineName) => {
+    if (this.checkStationBeforeDeleteFromSection(lineName)) {
+      return;
+    }
+
     if (window.confirm('정말로 삭제하시겠습니까?')) {
       const order =
         event.target.parentElement.parentElement.childNodes[1].innerText;
@@ -165,6 +169,13 @@ export default class SubwayController {
       this.loadTableInSectionManagerTab(lineName);
     }
   };
+
+  checkStationBeforeDeleteFromSection(lineName) {
+    if (this.model.lineObj[lineName].length < 3) {
+      alert('노선에 포함된 역이 두개 이하일 때는 역을 제거할 수 없습니다.');
+      return true;
+    }
+  }
 
   loadMapPrintManagerTab() {
     this.view.showMapPrintManagerTab();
