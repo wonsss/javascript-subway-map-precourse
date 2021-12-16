@@ -106,6 +106,7 @@ export default class SubwayController {
       this.view.clearTarget(section);
     });
     const lineName = e.target.innerText;
+    this.currentLine = lineName;
     // const stationList = this.model.lineObj[lineName];
     this.view.renderInTarget(
       $.sectionManagerTab(),
@@ -148,10 +149,22 @@ export default class SubwayController {
         $.sectionTbody(i, lineStationList[i])
       );
     }
-    $.lineDeleteButtons().forEach(button =>
-      button.addEventListener('click', this.lineDeleteBtnHandler)
+    $.sectionDeleteButtons().forEach(button =>
+      button.addEventListener('click', event =>
+        this.sectionDeleteBtnHandler(event, lineName)
+      )
     );
   }
+
+  sectionDeleteBtnHandler = (event, lineName) => {
+    if (window.confirm('정말로 삭제하시겠습니까?')) {
+      const order =
+        event.target.parentElement.parentElement.childNodes[1].innerText;
+      this.model.deleteStationFromLineObj(lineName, order);
+      this.model.setLocalStorage(KEY.line, this.model.lineObj);
+      this.loadTableInSectionManagerTab(lineName);
+    }
+  };
 
   loadMapPrintManagerTab() {
     this.view.showMapPrintManagerTab();

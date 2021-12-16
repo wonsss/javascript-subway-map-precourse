@@ -125,7 +125,7 @@ const elements = Object.freeze({
 <tr>
   <td>${index}</td>
   <td>${stationName}</td>
-  <td><button class="${CLASS.sectionDeleteButton}">삭제</button></td>
+  <td><button class="${CLASS.sectionDeleteButton}">노선에서 제거</button></td>
 </tr>
 `,
 

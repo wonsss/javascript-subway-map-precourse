@@ -33,6 +33,10 @@ export default class SubwayModel {
     this.lineObj[lineName].splice(order, 0, stationName);
   }
 
+  deleteStationFromLineObj(lineName, order) {
+    this.lineObj[lineName].splice(order, 1);
+  }
+
   deleteLineInObj(lineName) {
     delete this.lineObj[lineName];
     this.setLocalStorage(KEY.line, this.lineObj);
