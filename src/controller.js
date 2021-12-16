@@ -173,17 +173,36 @@ export default class SubwayController {
   addStationBtnHandler(e) {
     e.preventDefault();
     const stationName = $.stationNameInput().value;
+    if (this.checkStationBeforeRegister(stationName)) {
+      return;
+    }
     this.view.renderTable($.stationTable(), $.stationTbody(stationName));
     $.stationDeleteButtons().forEach(button =>
       button.addEventListener('click', this.stationDeleteBtnHandler)
     );
-    this.model.setStationObj(stationName, false);
+    this.model.setStationObj(stationName);
+  }
+
+  checkStationBeforeRegister(stationName) {
+    if (stationName.length < 2) {
+      alert('지하철 역은 2글자 이상이어야 합니다');
+      return true;
+    }
+    for (const station in this.model.stationObj) {
+      if (station === stationName) {
+        alert('중복된 지하철 역 이름은 등록될 수 없습니다.');
+        return true;
+      }
+    }
   }
 
   addLineBtnHandler(e) {
     e.preventDefault();
     const lineName =
       document.forms[ID.lineAddButton].elements[ID.lineNameInput].value;
+    if (this.checkLineBeforeRegister(lineName)) {
+      return;
+    }
     const startStation =
       document.forms[ID.lineAddButton].elements[ID.lineStartStationSelector]
         .value;
@@ -200,26 +219,39 @@ export default class SubwayController {
     this.model.setLineObjInitially(lineName, startStation, endStation);
   }
 
+  checkLineBeforeRegister(lineName) {
+    for (const line in this.model.lineObj) {
+      if (line === lineName) {
+        alert('중복된 지하철 노선 이름은 등록될 수 없습니다.');
+        return true;
+      }
+    }
+  }
+
   stationDeleteBtnHandler = event => {
     const stationName =
       event.target.parentElement.parentElement.childNodes[1].innerText;
-    const { lineObj } = this.model;
-    for (const line in lineObj) {
-      if (Object.hasOwnProperty.call(lineObj, line)) {
-        for (let i = 0; i < lineObj[line].length; i++) {
-          if (lineObj[line][i] === stationName) {
-            alert('노선에 등록된 역은 삭제할 수 없습니다.');
-            return;
-          }
-        }
-      }
-    }
-    if (!window.confirm('정말로 삭제하시겠습니까?')) {
-      return;
-    }
+    if (this.checkStationIfRegistered(stationName)) return;
+    if (!window.confirm('정말로 삭제하시겠습니까?')) return;
+
     this.view.removeRowOfTable(event);
     this.model.deleteStationInObj(stationName);
   };
+
+  checkStationIfRegistered(stationName) {
+    const { lineObj } = this.model;
+    for (const line in lineObj) {
+      if (checkLine(lineObj, line, stationName)) return true;
+    }
+    function checkLine(lineObj, line, stationName) {
+      for (let i = 0; i < lineObj[line].length; i++) {
+        if (lineObj[line][i] === stationName) {
+          alert('노선에 등록된 역은 삭제할 수 없습니다.');
+          return true;
+        }
+      }
+    }
+  }
 
   lineDeleteBtnHandler = event => {
     if (window.confirm('정말로 삭제하시겠습니까?')) {

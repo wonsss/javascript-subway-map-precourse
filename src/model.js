@@ -14,8 +14,8 @@ export default class SubwayModel {
     return this._lineObj ?? {};
   }
 
-  setStationObj(stationName, bool) {
-    this._stationObj[stationName] = bool;
+  setStationObj(stationName) {
+    this._stationObj[stationName] = true;
     this.setLocalStorage(KEY.station, this.stationObj);
   }
 
