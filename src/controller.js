@@ -123,11 +123,21 @@ export default class SubwayController {
     const stationName =
       document.forms[ID.sectionAddButton].elements[ID.sectionStationSelector]
         .value;
+    if (this.checkSectionBeforeRegister(lineName, stationName)) {
+      return;
+    }
     const order =
       document.forms[ID.sectionAddButton].elements[ID.sectionOrderInput].value;
     this.model.addStationToLineObj(lineName, order, stationName);
     this.loadTableInSectionManagerTab(lineName);
     this.model.setLocalStorage(KEY.line, this.model.lineObj);
+  }
+
+  checkSectionBeforeRegister(lineName, stationName) {
+    if (this.model.lineObj[lineName].includes(stationName)) {
+      alert(MESSAGE.alertOfStationNameThatAlreadyRegistered);
+      return true;
+    }
   }
 
   loadOptionInSectionManagerTab() {

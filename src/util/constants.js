@@ -51,6 +51,8 @@ const MESSAGE = Object.freeze({
   alertOfCannotDeleteStationRegistered:
     '노선에 등록된 역은 삭제할 수 없습니다.',
   alertOfSameEndpoints: '종점이 같을 수 없습니다.',
+  alertOfStationNameThatAlreadyRegistered:
+    '선택하신 역은 이미 해당 노선에 등록되어 있습니다.',
 });
 
 export { ID, CLASS, KEY, MESSAGE };
