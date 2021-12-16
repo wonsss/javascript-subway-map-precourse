@@ -67,6 +67,9 @@
   - [x] 지하철 구간을 설정할 역 select 태그는 `#section-station-selector` id값을 가진다.
   - [x] 지하철 구간의 순서를 입력하는 input 태그는 `#section-order-input` id값을 가진다.
   - [x] 지하철 구간을 등록하는 button 태그는 `#section-add-button` id값을 가진다.
+- 추가
+  - [x] 한 노선에서 상행 종점과 하행 종점이 같을 수 없다.
+  - [x] 노선의 이름은 2글자 이상이어야 한다.
 
 ### 5. [구간 관리] 지하철 구간 삭제 기능
 

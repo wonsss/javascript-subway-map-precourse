@@ -239,6 +239,9 @@ export default class SubwayController {
     const endStation =
       document.forms[ID.lineAddButton].elements[ID.lineEndStationSelector]
         .value;
+    if (this.checkStationBeforeRegister(startStation, endStation)) {
+      return;
+    }
     this.view.renderTable(
       $.lineTable(),
       $.lineTbody(lineName, startStation, endStation)
@@ -250,11 +253,22 @@ export default class SubwayController {
   }
 
   checkLineBeforeRegister(lineName) {
+    if (lineName.length < 3) {
+      alert(MESSAGE.alertOfShortLineName);
+      return true;
+    }
     for (const line in this.model.lineObj) {
       if (line === lineName) {
         alert(MESSAGE.alertOfLineNameThatAlreadyExists);
         return true;
       }
+    }
+  }
+
+  checkStationBeforeRegister(startStation, endStation) {
+    if (startStation === endStation) {
+      alert(MESSAGE.alertOfSameEndpoints);
+      return true;
     }
   }
 

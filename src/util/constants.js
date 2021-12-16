@@ -43,12 +43,14 @@ const MESSAGE = Object.freeze({
   alertOfUnderTwoStation:
     '노선에 포함된 역이 두개 이하일 때는 역을 제거할 수 없습니다.',
   alertOfShortStationName: '지하철 역은 2글자 이상이어야 합니다.',
+  alertOfShortLineName: '노선 이름은 2글자 이상이어야 합니다.',
   alertOfStationNameThatAlreadyExists:
     '중복된 지하철 역 이름은 등록될 수 없습니다.',
   alertOfLineNameThatAlreadyExists:
     '중복된 지하철 노선 이름은 등록될 수 없습니다.',
   alertOfCannotDeleteStationRegistered:
     '노선에 등록된 역은 삭제할 수 없습니다.',
+  alertOfSameEndpoints: '종점이 같을 수 없습니다.',
 });
 
 export { ID, CLASS, KEY, MESSAGE };
